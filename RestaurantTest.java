@@ -22,7 +22,9 @@ class RestaurantTest {
     //-------FOR THE 2 TESTS BELOW, YOU MAY USE THE CONCEPT OF MOCKING, IF YOU RUN INTO ANY TROUBLE
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
-
+        restaurant = Mockito.mock(Restaurant.class);
+        LocalTime time = LocalTime.parse("10:43:41.567");
+        Mockito.when(restaurant.getCurrentTime()).thenReturn(time);
         boolean result=restaurant.isRestaurantOpen();
         assertTrue(result);
     }
@@ -30,8 +32,8 @@ class RestaurantTest {
     @Test
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time(){
         restaurant = Mockito.mock(Restaurant.class);
-        LocalTime fourhourafter = LocalTime.now().minusHours(4);
-        Mockito.when(restaurant.getCurrentTime()).thenReturn(fourhourafter);
+        LocalTime time = LocalTime.parse("20:43:41.567");
+        Mockito.when(restaurant.getCurrentTime()).thenReturn(time);
         boolean result=restaurant.isRestaurantOpen();
         assertFalse(result);
 
